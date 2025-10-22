@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unwanted Chat</title>
+  <meta name="description" content="Join India's top social group – meet people from all states in English & Hindi. Admins: @Bunnyxpromoter, @Nidhipromos, @SHNWAZ6">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #0f172a; /* Navy dark */
+      --card-bg: #1e293b;
+      --accent: #38bdf8; /* Bright cyan-blue */
+      --accent-hover: #0ea5e9;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100vh;
+      background: #1a2234;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transition: left 0.4s ease;
+      z-index: 1000;
+      padding: 2rem 1.5rem;
+    }
+
+    #sidebar.active {
+      left: 0;
+    }
+
+    #menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--card-bg);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--accent);
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #sidebar h2 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+    }
+
+    #sidebar ul {
+      list-style: none;
+    }
+
+    #sidebar ul li {
+      margin: 1.3rem 0;
+    }
+
+    #sidebar ul li a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #sidebar ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* Main */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--accent), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 650px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 34px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.5);
+      background: var(--accent-hover);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 3.5rem 0 2rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .promo-banner h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .promo-banner a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    /* Admins */
+    .admins {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .admin-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 25px 20px;
+      width: 190px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .admin-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+
+    .admin-card img {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 14px;
+      border: 2px solid var(--accent);
+    }
+
+    .admin-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .admin-card .username {
+      display: block;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .admin-card .role {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .admin-card a {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 5px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 2rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .admin-card { width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div id="sidebar">
+    <h2>Unwanted Chat</h2>
+    <ul>
+      <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#admins"><i class="fas fa-users-cog"></i> Admins</a></li>
+      <li><a href="#promo"><i class="fas fa-bullhorn"></i> Promo Channel</a></li>
+      <li><a href="https://t.me/+nzYYyhVT2Q0xZjk0" target="_blank"><i class="fab fa-telegram-plane"></i> Join Group</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div class="hero" id="home">
+      <h1>Welcome to Unwanted Chat</h1>
+      <p>This is one of the best groups for meeting new people from different States and cultures. Let's make new friends and have fun communicating in English and Hindi.</p>
+      <a href="https://t.me/+nzYYyhVT2Q0xZjk0" class="btn" target="_blank">
+        <i class="fab fa-telegram-plane"></i> Join Telegram Group
+      </a>
+    </div>
+
+    <div class="promo-banner" id="promo">
+      <h3>🚀 Official Promo Channel</h3>
+      <p>For promotions, ads, or collaborations</p>
+      <a href="https://t.me/promo_worldb" target="_blank">@promo_worldb</a>
+    </div>
+
+    <h2 class="section-title" id="admins">Official Admins</h2>
+    <div class="admins">
+      <!-- Bunny -->
+      <div class="admin-card" data-tilt>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Bunny">
+        <h4>Bunny</h4>
+        <span class="role">Promoter & Admin</span>
+        <span class="username">@Bunnyxpromoter</span>
+        <a href="https://t.me/Bunnyxpromoter" target="_blank">Message</a>
+      </div>
+
+      <!-- Nidhi -->
+      <div class="admin-card" data-tilt>
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Nidhi">
+        <h4>Nidhi</h4>
+        <span class="role">Promo Manager</span>
+        <span class="username">@Nidhipromos</span>
+        <a href="https://t.me/Nidhipromos" target="_blank">Message</a>
+      </div>
+
+      <!-- SHNWAZ6 – Using YOUR IMAGE -->
+      <div class="admin-card" data-tilt>
+        <img src="https://i.pinimg.com/1200x/30/9c/75/309c755a53b1b720d966b4a2e0be0437.jpg" alt="Shnwaz">
+        <h4>Shnwaz</h4>
+        <span class="role">Admin</span>
+        <span class="username">@SHNWAZ6</span>
+        <a href="https://t.me/SHNWAZ6" target="_blank">Message</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Unwanted Chat • Connect. Chat. Belong.
+  </footer>
+
+  <!-- Vanilla Tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script>
+    VanillaTilt.init(document.querySelectorAll(".admin-card"), {
+      max: 12,
+      speed: 300,
+      glare: true,
+      "max-glare": 0.25,
+    });
+
+    document.getElementById("menu-toggle").onclick = () => {
+      document.getElementById("sidebar").classList.toggle("active");
+    };
+
+    document.querySelectorAll("#sidebar a").forEach(a => {
+      a.onclick = () => document.getElementById("sidebar").classList.remove("active");
+    });
+  </script>
+</body>
+</html>
